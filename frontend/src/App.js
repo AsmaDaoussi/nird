@@ -16,6 +16,7 @@ import ForumPage from './pages/ForumPage';
 import PostDetailPage from './pages/PostDetailPage';
 import CreatePostPage from './pages/CreatePostPage';
 import ProfilePage from './pages/ProfilePage';
+import SolutionComparePage from './pages/SolutionComparePage';
 
 // Components
 import Navbar from './components/common/Navbar';
@@ -110,8 +111,13 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/village" element={<VillagePage />} />
+              
+              {/* ✅ SOLUTIONS ROUTES - ORDRE CRITIQUE ! */}
               <Route path="/solutions" element={<SolutionsPage />} />
-              <Route path="/solutions/:id" element={<SolutionDetailPage />} />
+              <Route path="/solutions/compare" element={<SolutionComparePage />} />  
+              <Route path="/solutions/:id" element={<SolutionDetailPage />} />       
+              
+              {/* Forum Routes */}
               <Route path="/forum" element={<ForumPage />} />
               <Route path="/forum/:id" element={<PostDetailPage />} />
 

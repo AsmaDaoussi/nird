@@ -113,7 +113,13 @@ const HomePage = () => {
                   réduire votre impact écologique et reprendre le contrôle de votre
                   infrastructure numérique.
                 </Typography>
-                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  gap: 2, 
+                  flexWrap: 'wrap',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  alignItems: { xs: 'stretch', sm: 'flex-start' }
+                }}>
                   <Button
                     variant="contained"
                     size="large"
@@ -124,8 +130,11 @@ const HomePage = () => {
                       fontWeight: 700,
                       px: 4,
                       py: 1.5,
+                      minWidth: { xs: '100%', sm: '220px' },
+                      boxShadow: 3,
                       '&:hover': {
                         backgroundColor: '#f8fafc',
+                        boxShadow: 6,
                       },
                     }}
                   >
@@ -141,9 +150,12 @@ const HomePage = () => {
                       fontWeight: 700,
                       px: 4,
                       py: 1.5,
+                      minWidth: { xs: '100%', sm: '220px' },
+                      border: '2px solid white',
                       '&:hover': {
                         borderColor: 'white',
-                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                        border: '2px solid white',
                       },
                     }}
                   >
@@ -174,8 +186,8 @@ const HomePage = () => {
         </Container>
       </Box>
 
-      {/* Stats Section */}
-      <Container maxWidth="lg" sx={{ mt: -4, mb: 8 }}>
+      {/* Stats Section - CORRECTION: Ajout de zIndex et position relative */}
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 10, mt: -6, mb: 8 }}>
         <Grid container spacing={3}>
           {stats.map((stat, index) => (
             <Grid item xs={6} md={3} key={index}>
@@ -185,12 +197,18 @@ const HomePage = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <Paper
-                  elevation={3}
+                  elevation={6}
                   sx={{
                     p: 3,
                     textAlign: 'center',
                     backgroundColor: 'white',
                     borderRadius: 3,
+                    height: '100%',
+                    transition: 'all 0.3s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: 8,
+                    },
                   }}
                 >
                   <Typography variant="h3" sx={{ mb: 1 }}>
@@ -214,7 +232,7 @@ const HomePage = () => {
         </Grid>
       </Container>
 
-      {/* Features Section */}
+      {/* Features Section - CORRECTION: Ajout de minHeight pour uniformiser */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Box sx={{ textAlign: 'center', mb: 6 }}>
           <Typography variant="h3" fontWeight={700} gutterBottom>
@@ -232,26 +250,29 @@ const HomePage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                style={{ height: '100%' }}
               >
                 <Card
                   elevation={2}
                   sx={{
                     height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
                     transition: 'all 0.3s',
                     '&:hover': {
                       boxShadow: 6,
+                      transform: 'translateY(-4px)',
                     },
                   }}
                 >
-                  <CardContent sx={{ p: 3 }}>
+                  <CardContent sx={{ p: 3, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                     <Box sx={{ color: feature.color, mb: 2 }}>
                       {feature.icon}
                     </Box>
                     <Typography variant="h6" fontWeight={600} gutterBottom>
                       {feature.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1 }}>
                       {feature.description}
                     </Typography>
                   </CardContent>
@@ -337,7 +358,7 @@ const HomePage = () => {
         </Container>
       </Box>
 
-      {/* Success Stories */}
+      {/* Success Stories - CORRECTION: Ajout de minHeight pour uniformiser */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Box sx={{ textAlign: 'center', mb: 6 }}>
           <Typography variant="h3" fontWeight={700} gutterBottom>
@@ -350,11 +371,20 @@ const HomePage = () => {
 
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
-            <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
+            <Paper 
+              elevation={3} 
+              sx={{ 
+                p: 3, 
+                borderRadius: 3,
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
               <Typography variant="h6" fontWeight={600} gutterBottom>
                 🏫 Lycée Carnot - Bruay
               </Typography>
-              <Typography variant="body2" color="text.secondary" paragraph>
+              <Typography variant="body2" color="text.secondary" paragraph sx={{ flexGrow: 1 }}>
                 120 PC sous Linux, économies de 18 000€/an, formation d'un club
                 élève qui aide d'autres établissements.
               </Typography>
@@ -362,22 +392,32 @@ const HomePage = () => {
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',
+                  gap: 1,
                   mt: 2,
                 }}
               >
-                <Chip label="💰 18k€" color="success" />
-                <Chip label="💻 120 PC" color="primary" />
-                <Chip label="🌍 3.2t CO2" color="warning" />
+                <Chip label="💰 18k€" color="success" size="small" />
+                <Chip label="💻 120 PC" color="primary" size="small" />
+                <Chip label="🌍 3.2t CO2" color="warning" size="small" />
               </Box>
             </Paper>
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
+            <Paper 
+              elevation={3} 
+              sx={{ 
+                p: 3, 
+                borderRadius: 3,
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
               <Typography variant="h6" fontWeight={600} gutterBottom>
                 🏫 Collège Victor Hugo - Lille
               </Typography>
-              <Typography variant="body2" color="text.secondary" paragraph>
+              <Typography variant="body2" color="text.secondary" paragraph sx={{ flexGrow: 1 }}>
                 30 PC sauvés de la benne, satisfaction élèves à 89%, temps
                 d'adaptation : 2 semaines seulement.
               </Typography>
@@ -385,22 +425,32 @@ const HomePage = () => {
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',
+                  gap: 1,
                   mt: 2,
                 }}
               >
-                <Chip label="💰 4.2k€" color="success" />
-                <Chip label="💻 30 PC" color="primary" />
-                <Chip label="😊 89%" color="info" />
+                <Chip label="💰 4.2k€" color="success" size="small" />
+                <Chip label="💻 30 PC" color="primary" size="small" />
+                <Chip label="😊 89%" color="info" size="small" />
               </Box>
             </Paper>
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
+            <Paper 
+              elevation={3} 
+              sx={{ 
+                p: 3, 
+                borderRadius: 3,
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
               <Typography variant="h6" fontWeight={600} gutterBottom>
                 🏫 École Primaire Pasteur
               </Typography>
-              <Typography variant="body2" color="text.secondary" paragraph>
+              <Typography variant="body2" color="text.secondary" paragraph sx={{ flexGrow: 1 }}>
                 15 tablettes reconditionnées, projet pédagogique sur
                 l'écologie numérique, budget divisé par 3.
               </Typography>
@@ -408,12 +458,13 @@ const HomePage = () => {
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',
+                  gap: 1,
                   mt: 2,
                 }}
               >
-                <Chip label="💰 2.1k€" color="success" />
-                <Chip label="📱 15 tab" color="primary" />
-                <Chip label="📚 Péda" color="secondary" />
+                <Chip label="💰 2.1k€" color="success" size="small" />
+                <Chip label="📱 15 tab" color="primary" size="small" />
+                <Chip label="📚 Péda" color="secondary" size="small" />
               </Box>
             </Paper>
           </Grid>
@@ -436,7 +487,14 @@ const HomePage = () => {
             Commencez votre diagnostic en 5 minutes et découvrez combien votre
             établissement peut économiser
           </Typography>
-          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            gap: 2, 
+            justifyContent: 'center', 
+            flexWrap: 'wrap',
+            flexDirection: { xs: 'column', sm: 'row' },
+            alignItems: { xs: 'stretch', sm: 'center' },
+          }}>
             <Button
               variant="contained"
               size="large"
@@ -447,6 +505,7 @@ const HomePage = () => {
                 fontWeight: 700,
                 px: 4,
                 py: 1.5,
+                minWidth: { xs: '100%', sm: '200px' },
                 '&:hover': {
                   backgroundColor: '#f8fafc',
                 },
@@ -464,9 +523,12 @@ const HomePage = () => {
                 fontWeight: 700,
                 px: 4,
                 py: 1.5,
+                minWidth: { xs: '100%', sm: '200px' },
+                border: '2px solid white',
                 '&:hover': {
                   borderColor: 'white',
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  border: '2px solid white',
                 },
               }}
             >
@@ -480,15 +542,16 @@ const HomePage = () => {
 };
 
 // Chip component (simple)
-const Chip = ({ label, color }) => (
+const Chip = ({ label, color, size = 'medium' }) => (
   <Box
     sx={{
       display: 'inline-block',
-      px: 1.5,
-      py: 0.5,
+      px: size === 'small' ? 1 : 1.5,
+      py: size === 'small' ? 0.25 : 0.5,
       borderRadius: 2,
-      fontSize: '0.875rem',
+      fontSize: size === 'small' ? '0.75rem' : '0.875rem',
       fontWeight: 600,
+      whiteSpace: 'nowrap',
       backgroundColor:
         color === 'success'
           ? '#d1fae5'

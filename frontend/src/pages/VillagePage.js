@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -9,7 +9,6 @@ import {
   Button,
   Box,
   Paper,
-  Avatar,
   Chip,
 } from '@mui/material';
 import {
@@ -29,7 +28,7 @@ import { useAuth } from '../context/AuthContext';
 const VillagePage = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
-  const [stats, setStats] = useState({
+  const [stats] = useState({
     computersSaved: 847,
     co2Reduced: 12.4,
     establishments: 34,
